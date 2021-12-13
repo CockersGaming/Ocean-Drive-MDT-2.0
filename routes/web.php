@@ -48,6 +48,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
     Route::resource('roles', 'RolesController');
 
     Route::resource('users', 'UsersController');
+
+    Route::get('requests', 'RequestsController@index')->name('requests.index');
+    Route::get('requests/accept/{id}', 'RequestsController@accept')->name('requests.accept');
+    Route::get('requests/reject/{id}', 'RequestsController@reject')->name('requests.reject');
+    Route::get('requests/destroy/{id}', 'RequestsController@destroy')->name('requests.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -15,10 +15,11 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('name')->unique();
-            $table->string('department')->unique();
-            $table->string('role')->unique();
+            $table->string('department');
+            $table->string('role');
+            $table->tinyInteger('rejected')->default(0);
             $table->timestamps();
         });
     }

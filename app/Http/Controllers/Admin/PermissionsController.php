@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -23,6 +24,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
+        abort_unless(Auth::user()->can('Administer Permissions'), '403');
         $permissions = Permissions::all(); //Get all permissions
 
         return view('Admin.permissions.index')->with('permissions', $permissions);
@@ -35,6 +37,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
+        abort_unless(Auth::user()->can('Administer Permissions'), '403');
         $roles = Role::get()->pluck('name', 'name');
         return view('Admin.permissions.create')->with('roles', $roles);
     }
@@ -50,6 +53,7 @@ class PermissionsController extends Controller
         $this->validate($request, [
             'name' => 'string|required|max:40',
         ]);
+        abort_unless(Auth::user()->can('Administer Permissions'), '403');
 
         $permission = Permissions::create($request->except('roles'));
         $roles = $request->input('roles') ? $request->input('roles') : [];
@@ -70,7 +74,8 @@ class PermissionsController extends Controller
      */
     public function show(Permissions $permissions)
     {
-        return redirect('permissions');
+        abort_unless(Auth::user()->can('Administer Permissions'), '403');
+        return redirect('permissions.index');
     }
 
     /**
@@ -81,6 +86,7 @@ class PermissionsController extends Controller
      */
     public function edit( $id)
     {
+        abort_unless(Auth::user()->can('Administer Permissions'), '403');
         $permission = Permission::findOrFail($id);
 
         return view('Admin.permissions.edit', compact('permission'));
@@ -96,6 +102,7 @@ class PermissionsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        abort_unless(Auth::user()->can('Administer Permissions'), '403');
         $permission = Permission::findOrFail($id);
         $this->validate($request, [
             'name'=>'string|required|max:40',
@@ -114,6 +121,7 @@ class PermissionsController extends Controller
      */
     public function destroy($id)
     {
+        abort_unless(Auth::user()->can('Administer Permissions'), '403');
         $permission = Permission::findOrFail($id);
 
         //Make it impossible to delete this specific permission

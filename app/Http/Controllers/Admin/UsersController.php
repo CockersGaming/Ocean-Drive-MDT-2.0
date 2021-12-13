@@ -23,7 +23,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-//        abort_unless(Auth::user()->can('Administer Users'), '403');
+        abort_unless(Auth::user()->can('Administer Users'), '403');
 
         $users = User::all();
 
@@ -37,7 +37,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-//        abort_unless(Auth::user()->can('Administer Users'), '403');
+        abort_unless(Auth::user()->can('Administer Users'), '403');
 
         $roles = Roles::get()->pluck('name', 'name');
 
@@ -51,14 +51,13 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-//        abort_unless(Auth::user()->can('Administer Users'), '403');
+        abort_unless(Auth::user()->can('Administer Users'), '403');
 
         $request->validate([
             'name' => 'required',
             'username' => 'required',
             'email' => 'required',
-            'password' => 'required',
-            'roles' => 'required'
+            'password' => 'required'
         ]);
 
         $user = User::create([
@@ -85,7 +84,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-//        abort_unless(Auth::user()->can('Administer Users'), '403');
+        abort_unless(Auth::user()->can('Administer Users'), '403');
         $user = User::findOrFail($id);
         return view('profile.show');
     }
@@ -98,9 +97,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-//        abort_unless(Auth::user()->can('Administer Users'), '403');
+        abort_unless(Auth::user()->can('Administer Users'), '403');
         $user = User::findOrFail($id);
-        return view('Admin.users.edit')->with(['user' => $user]);
+        $roles = Role::get()->pluck('name', 'name');
+        return view('Admin.users.edit')->with(['user' => $user, 'roles' => $roles]);
     }
 
     /**
@@ -108,13 +108,33 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-//        abort_unless(Auth::user()->can('Administer Users'), '403');
+        $request->validate([
+            'name' => 'required',
+            'roles' => 'required',
+        ]);
+        abort_unless(Auth::user()->can('Administer Users'), '403');
         $user = User::findOrFail($id);
-        $user->fill($request->all())->save();
+
+        if($request->input('password')){
+            $user->update([
+                'name' => $request->input('name'),
+                'username' => $request->input('username'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+            ]);
+        } else {
+            $user->update([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+            ]);
+        }
+
+        $roles = $request->input('roles') ? $request->input('roles') : [];
+        $user->syncRoles($roles);
 
         return redirect()->route('users.index')->with('success', 'User '.$user->name.' updated!');
     }
@@ -127,7 +147,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-//        abort_unless(Auth::user()->can('Delete User'), '403');
+        abort_unless(Auth::user()->can('Administer Users'), '403');
         $user = User::findOrFail($id);
         $user->delete();
 

@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class RolesController extends Controller
 {
@@ -21,6 +22,7 @@ class RolesController extends Controller
      */
     public function index()
     {
+        abort_unless(Auth::user()->can('Administer Roles'), '403');
         $roles = Roles::all();
         return view('Admin.roles.index')->with('roles', $roles);
     }
@@ -32,6 +34,7 @@ class RolesController extends Controller
      */
     public function create()
     {
+        abort_unless(Auth::user()->can('Administer Roles'), '403');
         $permissions = Permissions::get()->pluck('name', 'name');
         return view('Admin.roles.create')->with('permissions', $permissions);
     }
@@ -48,6 +51,7 @@ class RolesController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
+        abort_unless(Auth::user()->can('Administer Roles'), '403');
 
         $role = Roles::create($request->except('permission'));
         $permissions = $request->input('permission') ? $request->input('permission') : [];
@@ -64,6 +68,7 @@ class RolesController extends Controller
      */
     public function show($id)
     {
+        abort_unless(Auth::user()->can('Administer Roles'), '403');
         $permissions = Permissions::get()->pluck('name', 'name');
 
         $role = Roles::findOrFail($id);
@@ -78,6 +83,7 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
+        abort_unless(Auth::user()->can('Administer Roles'), '403');
         $permissions = Permissions::get()->pluck('name', 'name');
 
         $role = Roles::findOrFail($id);
@@ -96,6 +102,7 @@ class RolesController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
+        abort_unless(Auth::user()->can('Administer Roles'), '403');
 
         $role = Roles::findOrFail($id);
         $role->update($request->except('permission'));
@@ -113,6 +120,7 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
+        abort_unless(Auth::user()->can('Administer Roles'), '403');
         $role = Roles::findOrFail($id);
         $role->delete();
 
