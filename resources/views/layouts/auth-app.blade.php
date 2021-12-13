@@ -1,36 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>@yield('title')</title>
+        <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="{{asset('./images/Logo.png')}}">
         <link rel="stylesheet" href="{{asset('./vendor/chartist/css/chartist.min.css')}}">
         <link href="{{asset('./vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
         <link href="{{asset('./vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
         <link href="{{asset('./css/style.css')}}" rel="stylesheet">
     </head>
-
-    <body>
-        <div id="preloader">
-            <div class="sk-three-bounce">
-                <div class="sk-child sk-bounce1"></div>
-                <div class="sk-child sk-bounce2"></div>
-                <div class="sk-child sk-bounce3"></div>
+    <body class="vh-100">
+        <div class="authincation h-100">
+            @include('layouts.flash_messages')
+            <div class="container h-100">
+                @yield('content')
             </div>
-        </div>
-        <div id="main-wrapper">
-            @include('layouts.includes.nav-head')
-            @include('layouts.includes.header')
-            @include('layouts.includes.sidebar')
-            <div class="content-body">
-                <div class="container-fluid">
-                    @include('layouts.flash_messages')
-                    @yield('content')
-                </div>
-            </div>
-            @include('layouts.includes.footer')
         </div>
         <script src="{{asset('./vendor/global/global.min.js')}}"></script>
         <script src="{{asset('./vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>

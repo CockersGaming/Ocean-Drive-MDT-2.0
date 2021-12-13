@@ -1,36 +1,30 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+@extends('layouts.auth-app')
+@section('title', 'Forgot Password')
+@section('content')
+    <div class="row justify-content-center h-100 align-items-center">
+        <div class="col-md-6">
+            <div class="authincation-content">
+                <div class="row no-gutters">
+                    <div class="col-xl-12">
+                        <div class="auth-form">
+                            <div class="text-center mb-3">
+                                <img src="{{asset('images/logo.png')}}" alt="">
+                            </div>
+                            <h4 class="text-center mb-4">Forgot Password</h4>
+                            <form method="POST" action="{{ route('password.confirm') }}">
+                                @csrf
+                                <div class="form-group">
+                                    <label><strong>Confirm Password</strong></label>
+                                    <input type="password" class="form-control" value="password">
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-block">SUBMIT</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('password.confirm') }}">
-            @csrf
-
-            <!-- Password -->
-            <div>
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <div class="flex justify-end mt-4">
-                <x-button>
-                    {{ __('Confirm') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+    </div>
+@stop

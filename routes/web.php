@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,39 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
+
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::get('request', 'RequestsController@index')->name('request.index');
+    Route::get('send', 'RequestsController@requestAccess')->name('request.send');
+});
+
+Auth::routes();
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::group(['namespace' => 'App\Http\Controllers\PD', 'name' => 'pd.'], function () {
+
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\EMS', 'name' => 'ems.'], function () {
+
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\DOJ', 'name' => 'doj.'], function () {
+
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
+
+    Route::resource('permissions', 'PermissionsController');
+
+    Route::resource('roles', 'RolesController');
+
+    Route::resource('users', 'UsersController');
+});
 
 require __DIR__.'/auth.php';
