@@ -8,8 +8,8 @@
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                             <img src="{{asset('images/Logo.png')}}" width="20" alt="" />
                             <div class="header-info">
-                                <span>{{Auth::user()->name}}</span>
-                                <small>Super Admin</small>
+                                <span>{{Auth::user()->fullname()}}</span>
+                                <small>{{Auth::user()->position()}}</small>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

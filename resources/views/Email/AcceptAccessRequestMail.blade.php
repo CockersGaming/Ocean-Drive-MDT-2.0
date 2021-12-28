@@ -1,10 +1,10 @@
 @component('mail::message')
-# Introduction
+# You have been Accepted
 
-The body of your message.
+Press the button bellow to register!
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => 'http://127.0.0.1:8000/register/'.$mailData['token']])
+Register
 @endcomponent
 
 Thanks,<br>

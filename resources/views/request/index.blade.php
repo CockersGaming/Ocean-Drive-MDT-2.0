@@ -23,10 +23,19 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Name</strong></label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required  placeholder="Salty Lord">
-                                    @error('name')
+                                    <label><strong>Firstame</strong></label>
+                                    <input type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required  placeholder="Salty Lord">
+                                    @error('fname')
                                         <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>Lastname</strong></label>
+                                    <input type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" value="{{ old('lname') }}" required  placeholder="Salty Lord">
+                                    @error('lname')
+                                    <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror

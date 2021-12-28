@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\AcceptAccessRequestMail;
+use App\Mail\RejectAccessRequestMail;
 use App\Models\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class RequestsController extends Controller
 {
@@ -17,8 +20,14 @@ class RequestsController extends Controller
      */
     public function index()
     {
-        $requests = Requests::all();
-        return view('Admin.requests.index')->with('requests', $requests);
+        $newRequests = Requests::all()->where('rejected','!=', 1)->where('accepted', '!=','1');
+        $acceptedRequests = Requests::all()->where('accepted', 1);
+        $rejectedRequests = Requests::all()->where('rejected', 1);
+        return view('Admin.requests.index')->with([
+            'requests' => $newRequests,
+            'accepted' => $acceptedRequests,
+            'rejected' => $rejectedRequests
+        ]);
     }
 
     /**
@@ -28,17 +37,23 @@ class RequestsController extends Controller
      */
     public function accept($id)
     {
+        abort_unless(Auth::user()->hasRole(1), '403');
         $request = Requests::findOrFail($id);
+        $token = Str::random(26);
         $details = [
             'name' => $request->name,
             'email' => $request->email,
             'department' => $request->department,
-            'role' => $request->role
+            'role' => $request->role,
+            'token' => $token
         ];
 
-        $request->update([
-            ''
-        ])->save();
+        if ($request) {
+            $request->rejected = 0;
+            $request->accepted = 1;
+            $request->token = $token;
+            $request->save();
+        }
 
         Mail::to($request->email)->send(new AcceptAccessRequestMail($details));
 
@@ -52,8 +67,24 @@ class RequestsController extends Controller
      */
     public function reject($id)
     {
-        $requests = Requests::all();
-        return view('Admin.requests.index')->with('requests', $requests);
+        abort_unless(Auth::user()->hasRole(1), '403');
+        $request = Requests::findOrFail($id);
+        $details = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'department' => $request->department,
+            'role' => $request->role
+        ];
+
+        if ($request) {
+            $request->rejected = 1;
+            $request->accepted = 0;
+            $request->save();;
+        }
+
+        Mail::to($request->email)->send(new RejectAccessRequestMail($details));
+
+        return redirect()->route('requests.index')->with(['success' => 'Email has been sent.']);
     }
 
     /**

@@ -19,7 +19,7 @@ class RejectAccessRequestMail extends Mailable
      */
     public function __construct($mailData)
     {
-        $this->$mailData = $mailData;
+        $this->mailData = $mailData;
     }
 
     /**

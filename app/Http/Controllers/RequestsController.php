@@ -35,7 +35,8 @@ class RequestsController extends Controller
     public function requestAccess(Request $request)
     {
         Requests::create([
-            'name' => $request->name,
+            'firstname' => $request->fname,
+            'lastname' => $request->lname,
             'email' => $request->email,
             'department' => $request->department,
             'role' => $request->role
@@ -43,7 +44,11 @@ class RequestsController extends Controller
 
         $details = [
             'title' => 'Access Request Sent',
-            'details' => 'You have requested to access Ocean Drive\'s MDT!<br><br>You have requested access using the bellow details:<br><ul><li>'.$request->name.'</li><li>'.$request->email.'</li><li>'.$request->department.'</li><li>'.$request->role.'</li></ul>'
+            'details' => 'You have requested to access Ocean Drive\'s MDT!<br><br>You have requested access using the bellow details:<br>',
+            'name' => $request->name,
+            'email' => $request->email,
+            'department' => $request->department,
+            'role' => $request->role
         ];
 
         Mail::to($request->email)->send(new AccessRequestMail($details));

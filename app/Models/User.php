@@ -20,10 +20,12 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'username',
         'email',
         'password',
+        'token'
     ];
 
     /**
@@ -47,6 +49,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function position()
     {
-        return $this->roles()->first();
+        return $this->roles()->first()->name;
+    }
+
+    public function fullname(): string
+    {
+        $first = $this->firstname;
+        $last = $this->lastname;
+        return $first." ".$last;
     }
 }

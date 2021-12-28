@@ -21,24 +21,25 @@ Route::get('/', function () {
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('request', 'RequestsController@index')->name('request.index');
     Route::get('send', 'RequestsController@requestAccess')->name('request.send');
+    Route::get('goto', 'HomeController@goTo')->name('goto');
 });
 
 Auth::routes();
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-Route::group(['namespace' => 'App\Http\Controllers\PD', 'name' => 'pd.'], function () {
-
+Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
+    Route::resource('admin', 'AdminController');
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\EMS', 'name' => 'ems.'], function () {
-
+Route::group(['namespace' => 'App\Http\Controllers\PD'], function () {
+    Route::resource('pd', 'PDController');
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\DOJ', 'name' => 'doj.'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\EMS'], function () {
+    Route::resource('ems', 'EMSController');
+});
 
+Route::group(['namespace' => 'App\Http\Controllers\DOJ'], function () {
+    Route::resource('doj', 'DOJController');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {

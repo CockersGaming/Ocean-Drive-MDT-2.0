@@ -7,6 +7,7 @@ use App\Models\Roles;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|Response|View
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -106,9 +107,9 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request, $id)
     {

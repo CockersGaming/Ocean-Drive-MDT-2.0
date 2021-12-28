@@ -43,7 +43,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $cockers = User::create([
-            'name' => 'Cockers',
+            'firstname' => 'James',
+            'lastname' => 'Cockfield',
             'username' => 'cockers_admin',
             'email' => 'jamescockfield10@gmail.com',
             'password' => '$2y$10$Z12yQr.fPzlcR9JRea7EY.w/gFvKIQ0uB3TLGXNmyzoPmCq6lvKHi'
