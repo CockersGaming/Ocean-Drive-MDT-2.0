@@ -10,6 +10,8 @@
         <link href="{{asset('./vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
         <link href="{{asset('./vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
         <link href="{{asset('./css/style.css')}}" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        @yield('styles')
     </head>
 
     <body>
@@ -41,5 +43,6 @@
         <script src="{{asset('./vendor/owl-carousel/owl.carousel.js')}}"></script>
         <script src="{{asset('./js/custom.min.js')}}"></script>
         <script src="{{asset('./js/deznav-init.js')}}"></script>
+        @yield('scripts')
     </body>
 </html>

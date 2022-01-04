@@ -16,6 +16,33 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{route('pd.index')}}">Home</a></li>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <span class="nav-text">Reports</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{route('reports.index')}}">Home</a></li>
+                                <li><a href="{{route('reports.create')}}">Create</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <span class="nav-text">Warrants</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Create</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <span class="nav-text">Lookup</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="#">Person</a></li>
+                                <li><a href="#">Car</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             @endif

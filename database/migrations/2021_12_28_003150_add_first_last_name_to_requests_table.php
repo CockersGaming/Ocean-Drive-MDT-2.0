@@ -14,8 +14,8 @@ class AddFirstLastNameToRequestsTable extends Migration
     public function up()
     {
         Schema::table('requests', function (Blueprint $table) {
-            $table->renameColumn('name', 'fname');
-            $table->string('lname');
+            $table->renameColumn('name', 'firstname');
+            $table->string('lastname');
         });
     }
 

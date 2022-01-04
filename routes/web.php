@@ -22,6 +22,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('request', 'RequestsController@index')->name('request.index');
     Route::get('send', 'RequestsController@requestAccess')->name('request.send');
     Route::get('goto', 'HomeController@goTo')->name('goto');
+    Route::get('search/ped','SearchController@ped')->name('search.ped');
 });
 
 Auth::routes();
@@ -32,6 +33,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
 
 Route::group(['namespace' => 'App\Http\Controllers\PD'], function () {
     Route::resource('pd', 'PDController');
+    Route::resource('reports', 'ReportController');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\EMS'], function () {
