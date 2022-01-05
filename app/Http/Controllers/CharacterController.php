@@ -41,12 +41,15 @@ class CharacterController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Character  $character
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Character $character)
+    public function show($id)
     {
-        //
+        $char = Character::findOrFail($id);
+        return view('Character.show')->with([
+            'char' => $char
+        ]);
     }
 
     /**

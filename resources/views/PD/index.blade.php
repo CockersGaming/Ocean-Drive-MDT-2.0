@@ -70,7 +70,7 @@
                             <div class="tab-pane fade show active" id="person" role="tabpanel">
                                 <div class="row">
                                     <div class="input-group search-area right d-lg-inline-flex d-none m-5 w-100">
-                                        <input id="search" name="search" type="text" class="form-control" style="color: black !important;" placeholder="Search for a person...">
+                                        <input id="searchPed" name="searchPed" type="text" class="form-control" style="color: black !important;" placeholder="Search for a Person..."  data-toggle="tooltip" data-placement="top" title="Press the Enter key to search">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -78,11 +78,12 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="table-responsive">
-                                                    <table class="table header-border table-hover verticle-middle">
+                                                    <table class="table header-border table-hover verticle-middle" id="ped">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
                                                             <th scope="col">Name</th>
+                                                            <th scope="col">Citizen ID</th>
                                                             <th scope="col">Actions</th>
                                                         </tr>
                                                         </thead>
@@ -97,7 +98,32 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="car">
-
+                                <div class="row">
+                                    <div class="input-group search-area right d-lg-inline-flex d-none m-5 w-100">
+                                        <input id="searchCar" name="searchCar" type="text" class="form-control" style="color: black !important;" placeholder="Search for a Car..." data-toggle="tooltip" data-placement="top" title="Press the Enter key to search">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table header-border table-hover verticle-middle" id="car">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Plate</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,7 +131,42 @@
             </div>
         </div>
         <div class="col-xl-4 col-sm-12 m-t35">
-
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Bulletin</h4>
+                    <a class="float-left btn btn-success text-white"> View More</a>
+                </div>
+                <div class="card-body">
+                    <div class="basic-list-group">
+                        <div class="list-group">
+                            <a href="javascript:void()" class="list-group-item list-group-item-action flex-column align-items-start active">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-3 text-white">List group item heading</h5><small>3 days
+                                        ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi
+                                    porta.</small>
+                            </a>
+                            <a href="javascript:void()" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-3">List group item heading</h5><small class="text-muted">3
+                                        days ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small class="text-muted">Donec
+                                    id elit non mi porta.</small>
+                            </a>
+                            <a href="javascript:void()" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-3">List group item heading</h5><small class="text-muted">3
+                                        days ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small class="text-muted">Donec
+                                    id elit non mi porta.</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @stop
@@ -117,16 +178,34 @@
     <script src="{{asset('js/deznav-init.js')}}"></script>
 
     <script type="text/javascript">
-        $('#search').on('keyup',function(){
-            $value = $(this).val();
-            $.ajax({
-                type : 'get',
-                url : '{{route('search.ped')}}',
-                data:{'search': $value},
-                success:function(data){
-                    $('tbody').html(data);
-                }
-            });
+        $('#searchPed').on('keypress',function(event) {
+            var keycode = (event.keycode ? event.keycode : event.which);
+            if (keycode == '13') { // check if enter key is pressed to search ped
+                $value = $(this).val();
+                $.ajax({
+                    type: 'get',
+                    url: '{{route('search.ped')}}',
+                    data: {'search': $value},
+                    success: function (data) {
+                        $('#ped tbody').html(data);
+                    }
+                });
+            }
+        })
+
+        $('#searchCar').on('keypress',function(event) {
+            var keycode = (event.keycode ? event.keycode : event.which);
+            if (keycode == '13') { // check if enter key is pressed to search car
+                $value = $(this).val();
+                $.ajax({
+                    type: 'get',
+                    url: '{{route('search.car')}}',
+                    data: {'search': $value},
+                    success: function (data) {
+                        $('#car tbody').html(data);
+                    }
+                });
+            }
         })
     </script>
 

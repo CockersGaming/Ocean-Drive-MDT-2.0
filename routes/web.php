@@ -23,6 +23,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('send', 'RequestsController@requestAccess')->name('request.send');
     Route::get('goto', 'HomeController@goTo')->name('goto');
     Route::get('search/ped','SearchController@ped')->name('search.ped');
+    Route::get('search/car','SearchController@car')->name('search.car');
 });
 
 Auth::routes();

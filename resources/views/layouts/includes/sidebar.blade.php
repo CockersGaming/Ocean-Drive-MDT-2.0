@@ -34,15 +34,6 @@
                                 <li><a href="#">Create</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                <span class="nav-text">Lookup</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="#">Person</a></li>
-                                <li><a href="#">Car</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
             @endif
