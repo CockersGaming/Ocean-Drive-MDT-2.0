@@ -24,6 +24,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('goto', 'HomeController@goTo')->name('goto');
     Route::get('search/ped','SearchController@ped')->name('search.ped');
     Route::get('search/car','SearchController@car')->name('search.car');
+    Route::resource('characters', 'CharacterController');
 });
 
 Auth::routes();
@@ -35,6 +36,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
 Route::group(['namespace' => 'App\Http\Controllers\PD'], function () {
     Route::resource('pd', 'PDController');
     Route::resource('reports', 'ReportController');
+    Route::resource('warrants', 'WarrantController');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\EMS'], function () {

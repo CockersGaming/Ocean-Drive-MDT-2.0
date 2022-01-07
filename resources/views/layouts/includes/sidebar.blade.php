@@ -22,7 +22,6 @@
                             </a>
                             <ul aria-expanded="false">
                                 <li><a href="{{route('reports.index')}}">Home</a></li>
-                                <li><a href="{{route('reports.create')}}">Create</a></li>
                             </ul>
                         </li>
                         <li>
@@ -31,7 +30,6 @@
                             </a>
                             <ul aria-expanded="false">
                                 <li><a href="#">Home</a></li>
-                                <li><a href="#">Create</a></li>
                             </ul>
                         </li>
                     </ul>

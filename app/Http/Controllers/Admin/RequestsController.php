@@ -39,7 +39,7 @@ class RequestsController extends Controller
     {
         abort_unless(Auth::user()->hasRole(1), '403');
         $request = Requests::findOrFail($id);
-        $token = Str::random(26);
+        $token = Str::uuid();
         $details = [
             'name' => $request->name,
             'email' => $request->email,

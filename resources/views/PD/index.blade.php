@@ -81,7 +81,6 @@
                                                     <table class="table header-border table-hover verticle-middle" id="ped">
                                                         <thead>
                                                         <tr>
-                                                            <th scope="col">#</th>
                                                             <th scope="col">Name</th>
                                                             <th scope="col">Citizen ID</th>
                                                             <th scope="col">Actions</th>
@@ -111,7 +110,6 @@
                                                     <table class="table header-border table-hover verticle-middle" id="car">
                                                         <thead>
                                                         <tr>
-                                                            <th scope="col">#</th>
                                                             <th scope="col">Plate</th>
                                                             <th scope="col">Actions</th>
                                                         </tr>
@@ -134,7 +132,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Bulletin</h4>
-                    <a class="float-left btn btn-success text-white"> View More</a>
+                    <a class="float-left btn btn-info text-white"> View More</a>
                 </div>
                 <div class="card-body">
                     <div class="basic-list-group">
