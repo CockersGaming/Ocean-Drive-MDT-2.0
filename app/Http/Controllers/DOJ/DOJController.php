@@ -14,7 +14,7 @@ class DOJController extends Controller
      */
     public function index()
     {
-        return view('doj.index');
+        return view('DOJ.index');
     }
 
     /**

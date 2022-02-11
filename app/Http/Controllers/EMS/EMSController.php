@@ -14,7 +14,7 @@ class EMSController extends Controller
      */
     public function index()
     {
-        return view('ems.index');
+        return view('EMS.index');
     }
 
     /**

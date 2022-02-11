@@ -19,7 +19,7 @@ class WarrantController extends Controller
     {
         $warrants = Warrant::all()->where('expire', '>=', date('Y-m-d', strtotime('-7 days')));
 
-        return view('pd.warrants.index')->with([
+        return view('PD.warrants.index')->with([
             'warrants' => $warrants
         ]);
     }
@@ -93,7 +93,7 @@ class WarrantController extends Controller
         $warrant = Warrant::findOrFail($id);
         $reports = Report::pluck('id', 'id');
 
-        return view('pd.warrants.edit')->with([
+        return view('PD.warrants.edit')->with([
             'warrant'=>$warrant,
             'reports'=>$reports
         ]);

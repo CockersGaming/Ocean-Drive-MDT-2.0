@@ -27,7 +27,7 @@ class ReportController extends Controller
     {
         $reports = Report::all();
 
-        return view('pd.reports.index')->with([
+        return view('PD.reports.index')->with([
             'reports' => $reports
         ]);
     }
@@ -77,7 +77,7 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        return view('pd.reports.show');
+        return view('PD.reports.show');
     }
 
     /**
@@ -92,7 +92,7 @@ class ReportController extends Controller
         if ($report->author_id === Auth::user()->id || Auth::user()->hasRole([1])){
             $ped = Character::findOrFail($report->ped_id);
             $charges = Charge::all();
-            return view('pd.reports.edit')->with([
+            return view('PD.reports.edit')->with([
                 'report' => $report,
                 'ped' => $ped,
                 'charges' => $charges,
