@@ -168,7 +168,6 @@
             </div>
         </div>
     </div>
-
     {{--  Modals  --}}
     {{--  Create Report Modal  --}}
     <div id="report-create" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -180,34 +179,50 @@
                 </div>
                 {!! Form::open(['method' => 'POST', 'route' => ['reports.store'], 'class' => 'form-valid']) !!}
                     <div class="modal-body">
-                        <input type="text" class="form-control" id="pedid" name="pedid" value="{{$char->id}}" readonly hidden placeholder="Enter a name..">
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="name">Name<span class="text-danger">*</span></label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" id="name" name="name" value="{{$char->fullname()}}" readonly placeholder="Enter a name..">
+                        <div class="row">
+                            <div class="col-8">
+                                <input type="text" class="form-control" id="pedid" name="pedid" value="{{$char->id}}" readonly hidden placeholder="Enter a name..">
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="name">Name<span class="text-danger">*</span></label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="name" name="name" value="{{$char->fullname()}}" readonly placeholder="Enter a name..">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="title">Title<span class="text-danger">*</span></label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter a Title for the report..">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="description">Description<span class="text-danger">*</span></label>
+                                    <div class="col-lg-6">
+                                        <textarea rows="8" type="text" class="form-control" id="description" name="description" placeholder="Enter a Description of the incident.."></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="charges">Charges<span class="text-danger">*</span></label>
+                                    <div class="col-lg-6">
+                                        {{ Form::select('charges[]', $charges, old('charges'), ['class' => 'form-control', 'multiple' => 'multiple', 'size' => 10, 'id' => 'charges']) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="author" name="author" readonly hidden value="{{ Auth::user()->id }}">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="title">Title<span class="text-danger">*</span></label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter a Title for the report..">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="description">Description<span class="text-danger">*</span></label>
-                            <div class="col-lg-6">
-                                <textarea rows="8" type="text" class="form-control" id="description" name="description" placeholder="Enter a Description of the incident.."></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="charges">Charges<span class="text-danger">*</span></label>
-                            <div class="col-lg-6">
-                                {{ Form::select('charges[]', $charges, old('charges'), ['multiple' => 'multiple', 'class' => 'form-control']) }}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" id="author" name="author" readonly hidden value="{{ Auth::user()->id }}">
+                            <div class="col-lg-4 h-50">
+                                <div class="row pb-2">
+                                    <div class="col-12">
+                                        <h4><b>Jail Time - <span id="jailTime">0</span> months</b></h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                       <h4> <b>Fine - $<span id="fine">0</span></b></h4>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -297,4 +312,41 @@
 @section('scripts')
     <script src="{{asset('vendor/select2/js/select2.full.min.js')}}"></script>
     <script src="{{asset('js/plugins-init/select2-init.js')}}"></script>
+    <script>
+
+        $('#charges').change(function() {
+            getInfo($(this))
+        })
+
+        function getInfo(elm) {
+            let selected = []
+            let jailTime = 0
+            let fine = 0;
+
+            elm.find(":selected").each(function (i) {
+                selected[i] = $(this).val();
+            })
+
+            $.ajax({
+                type: 'get',
+                url: '{{ route('charge.data') }}',
+                success: function (response) {
+                    $.each(selected, function (selI, selV) {
+                        $.each(response.success, function (i,v) {
+                            if(parseInt(selV) === parseInt(v["id"])) {
+                                jailTime += parseInt(v["jailTime"])
+                                fine += parseInt(v["chargeAmount"])
+                            }
+                        })
+                    })
+
+                    $('#jailTime').text(jailTime)
+                    $('#fine').text(fine)
+                },
+                error: function (response) {
+                    // alert('Error'+ response);
+                }
+            });
+        }
+    </script>
 @stop
