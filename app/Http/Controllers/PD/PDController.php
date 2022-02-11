@@ -14,7 +14,7 @@ class PDController extends Controller
      */
     public function index()
     {
-            return view('pd.index');
+            return view('PD.index');
     }
 
     /**
