@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,53 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::get('request', 'RequestsController@index')->name('request.index');
+    Route::get('send', 'RequestsController@requestAccess')->name('request.send');
+    Route::get('goto', 'HomeController@goTo')->name('goto');
+    Route::get('search/ped','SearchController@ped')->name('search.ped');
+    Route::get('search/car','SearchController@car')->name('search.car');
+    Route::resource('characters', 'CharacterController');
+});
+
+Auth::routes();
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
+    Route::resource('admin', 'AdminController');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\PD'], function () {
+    Route::resource('pd', 'PDController');
+    Route::resource('reports', 'ReportController');
+    Route::resource('warrants', 'WarrantController');
+    Route::get('charge/data', 'AjaxController@getCharges')->name('charge.data');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\EMS'], function () {
+    Route::resource('ems', 'EMSController');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\DOJ'], function () {
+    Route::resource('doj', 'DOJController');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
+
+    Route::resource('permissions', 'PermissionsController');
+
+    Route::resource('roles', 'RolesController');
+
+    Route::resource('users', 'UsersController');
+
+    Route::resource('charges', 'ChargeController');
+
+    Route::get('requests', 'RequestsController@index')->name('requests.index');
+    Route::get('requests/accept/{id}', 'RequestsController@accept')->name('requests.accept');
+    Route::get('requests/reject/{id}', 'RequestsController@reject')->name('requests.reject');
+    Route::get('requests/destroy/{id}', 'RequestsController@destroy')->name('requests.destroy');
+});
 
 require __DIR__.'/auth.php';

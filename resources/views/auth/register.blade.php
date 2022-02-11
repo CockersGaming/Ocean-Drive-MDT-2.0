@@ -1,59 +1,89 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.auth-app')
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+@section('title', 'Register')
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+@section('style')
+    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.min.css')}}">
+    <style>
+        #select2-nameSearch-container, .select2-search__field {
+            color: white !important;
+        }
+    </style>
+@stop
 
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
+@section('script')
+    <script src="{{asset('vendor/select2/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('js/plugins-init/select2-init.js')}}"></script>
+@stop
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+@section('content')
+    <div class="row justify-content-center h-100 align-items-center">
+        <div class="col-md-6">
+            <div class="authincation-content">
+                <div class="row no-gutters">
+                    <div class="col-xl-12">
+                        <div class="auth-form">
+                            <div class="text-center mb-3">
+                                <img src="{{asset('images/logo.png')}}" alt="">
+                            </div>
+                            <h4 class="text-center mb-4">Sign in your account</h4>
+                            <form method="POST" action="{{ route('register.store') }}">
+                                @csrf
+                                <div class="form-group">
+                                    <label class="mb-1"><strong>Find your Name:</strong></label>
+                                    <select id="nameSearch" name="nameSearch" class="single-select">
+                                        @foreach($chars as $c)
+                                            <option value="{{$c->id}}">{{$c->fullname()}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="mb-1"><strong>Username</strong></label>
+                                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required  placeholder="doopi">
+                                    @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label class="mb-1"><strong>Email</strong></label>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $request->email }}" required  placeholder="example@email.com">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label class="mb-1"><strong>Password</strong></label>
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label class="mb-1"><strong>Confirm Password</strong></label>
+                                    <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="current-password" placeholder="Password">
+                                    @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                </div>
+                            </form>
+                            <div class="new-account mt-3">
+                                <p>Already have an account? <a class="text-primary" href="{{route('login')}}">Login</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </div>
+    </div>
+@stop
