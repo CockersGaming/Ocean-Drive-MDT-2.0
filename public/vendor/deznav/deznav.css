@@ -20,7 +20,7 @@ Table of Contents
     3.3. widget-timeline
     3.4. widget-social
 
-4. ICO 
+4. ICO
     4.1. ico-countdown
     4.2. ico-exchange
     4.3. ico-timeline
@@ -107,11 +107,11 @@ Table of Contents
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
 @import url(../vendor/deznav/deznav.css);
-@import url("./../../icons/simple-line-icons/css/simple-line-icons.css");
-@import url("./../../icons/font-awesome-old/css/font-awesome.min.css");
-@import url("./../../icons/material-design-iconic-font/css/materialdesignicons.min.css");
-@import url("./../../icons/themify-icons/css/themify-icons.css");
-@import url("./../../icons/line-awesome/css/line-awesome.min.css");
+@import url("./../../icons-dir/simple-line-icons/css/simple-line-icons.css");
+@import url("./../../icons-dir/font-awesome-old/css/font-awesome.min.css");
+@import url("./../../icons-dir/material-design-iconic-font/css/materialdesignicons.min.css");
+@import url("./../../icons-dir/themify-icons/css/themify-icons.css");
+@import url("./../../icons-dir/line-awesome/css/line-awesome.min.css");
 @import url(../animate/animate.min.css);
 @import url(../aos/css/aos.min.css);
 @import url(../perfect-scrollbar/css/perfect-scrollbar.css);
