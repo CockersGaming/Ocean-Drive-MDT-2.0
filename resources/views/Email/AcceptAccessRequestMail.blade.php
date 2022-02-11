@@ -3,7 +3,7 @@
 
 Press the button bellow to register!
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/register/'.$mailData['token']])
+@component('mail::button', ['url' => 'https://mdt.jamescockfield.dev/register/'.$mailData['token']])
 Register
 @endcomponent
 
