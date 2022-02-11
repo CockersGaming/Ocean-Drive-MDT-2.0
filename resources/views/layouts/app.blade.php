@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>@yield('title')</title>
-        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('./images/Logo.png')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('./images/logo.png')}}">
         <link rel="stylesheet" href="{{asset('./vendor/chartist/css/chartist.min.css')}}">
         <link href="{{asset('./vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
         <link href="{{asset('./vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
