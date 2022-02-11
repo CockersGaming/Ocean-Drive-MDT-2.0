@@ -37,6 +37,7 @@ Route::group(['namespace' => 'App\Http\Controllers\PD'], function () {
     Route::resource('pd', 'PDController');
     Route::resource('reports', 'ReportController');
     Route::resource('warrants', 'WarrantController');
+    Route::get('charge/data', 'AjaxController@getCharges')->name('charge.data');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\EMS'], function () {
@@ -54,6 +55,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
     Route::resource('roles', 'RolesController');
 
     Route::resource('users', 'UsersController');
+
+    Route::resource('charges', 'ChargeController');
 
     Route::get('requests', 'RequestsController@index')->name('requests.index');
     Route::get('requests/accept/{id}', 'RequestsController@accept')->name('requests.accept');

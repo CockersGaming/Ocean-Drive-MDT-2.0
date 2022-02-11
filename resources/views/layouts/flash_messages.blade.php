@@ -1,5 +1,5 @@
 @if(session('info'))
-    <div class="alert alert-info" style="width: 100vw !important;">
+    <div class="alert alert-info" style="width: 100% !important;">
         <div class="container">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="material-icons">clear</i></span>
@@ -9,7 +9,7 @@
     </div>
 @endif
 @if(session('success'))
-    <div class="alert alert-success" style="width: 100vw !important;">
+    <div class="alert alert-success" style="width: 100% !important;">
         <div class="container">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="material-icons">clear</i></span>
@@ -19,7 +19,7 @@
     </div>
 @endif
 @if(session('warning'))
-    <div class="alert alert-warning" style="width: 100vw !important;">
+    <div class="alert alert-warning" style="width: 100% !important;">
         <div class="container">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="material-icons">clear</i></span>
@@ -29,7 +29,7 @@
     </div>
 @endif
 @if(session('error'))
-    <div class="alert alert-danger" style="width: 100vw !important;">
+    <div class="alert alert-danger" style="width: 100% !important;">
         <div class="container">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="material-icons">clear</i></span>

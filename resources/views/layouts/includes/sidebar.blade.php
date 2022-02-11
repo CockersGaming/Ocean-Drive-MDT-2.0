@@ -4,7 +4,6 @@
             <img src="{{asset('images/logo.png')}}" alt="">
             <a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
             <h5 class="mb-0 fs-20 text-black "><span class="font-w400">Hello,</span> {{Auth::user()->fullname()}}</h5>
-            <p class="mb-0 fs-14 font-w400">{{Auth::user()->email}}</p>
         </div>
         <ul class="metismenu" id="menu">
 
@@ -71,9 +70,14 @@
                         <li><a href="{{route('roles.index')}}">Roles</a></li>
                         <li><a href="{{route('permissions.index')}}">Permissions</a></li>
                         <li><a href="{{route('requests.index')}}">Requests</a></li>
+                        <li><a href="{{route('charges.index')}}">Charges</a></li>
                     </ul>
                 </li>
             @endif
         </ul>
+        <div class="copyright">
+            <p><strong>OD MDT v{{ env('APP_VERSION') }}</strong> © 2021 All Rights Reserved</p>
+            <p class="fs-12">Made with <i class="fa fa-heart text-danger"></i> by <a href="https://jamescockfield.dev" target="_blank" style="text-decoration: none;">James Cockfield</a></p>
+        </div>
     </div>
 </div>

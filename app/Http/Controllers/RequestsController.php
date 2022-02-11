@@ -9,10 +9,9 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Illuminate\Support\Str;
 
 class RequestsController extends Controller
 {
@@ -34,18 +33,21 @@ class RequestsController extends Controller
      */
     public function requestAccess(Request $request)
     {
+        $str = Str::uuid();
+
         Requests::create([
             'firstname' => $request->fname,
             'lastname' => $request->lname,
             'email' => $request->email,
             'department' => $request->department,
-            'role' => $request->role
+            'role' => $request->role,
+            'token' => $str,
         ]);
 
         $details = [
             'title' => 'Access Request Sent',
             'details' => 'You have requested to access Ocean Drive\'s MDT!<br><br>You have requested access using the bellow details:<br>',
-            'name' => $request->name,
+            'name' => $request->fname.' '.$request->lname,
             'email' => $request->email,
             'department' => $request->department,
             'role' => $request->role

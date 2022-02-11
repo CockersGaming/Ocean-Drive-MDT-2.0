@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\VerifiesEmails;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -20,8 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstname',
-        'lastname',
+        'char_id',
         'username',
         'email',
         'password',
@@ -52,10 +51,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->roles()->first()->name;
     }
 
+    public function char_link() {
+        return Character::findOrFail($this->char_id);
+    }
+
     public function fullname(): string
     {
-        $first = $this->firstname;
-        $last = $this->lastname;
-        return $first." ".$last;
+        return $this->char_link()->fullname();
     }
 }

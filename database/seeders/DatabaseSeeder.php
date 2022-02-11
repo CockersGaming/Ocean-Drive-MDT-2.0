@@ -28,6 +28,9 @@ class DatabaseSeeder extends Seeder
         $aR = Permissions::create([
             'name' => 'Administer Requests'
         ]);
+        $aC = Permissions::create([
+            'name' => 'Administer Charges'
+        ]);
 
         $a = Role::create([
             'name' => 'Admin'
@@ -43,8 +46,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $cockers = User::create([
-            'firstname' => 'James',
-            'lastname' => 'Cockfield',
+            'char_id' => 10,
             'username' => 'cockers_admin',
             'email' => 'jamescockfield10@gmail.com',
             'password' => '$2y$10$Z12yQr.fPzlcR9JRea7EY.w/gFvKIQ0uB3TLGXNmyzoPmCq6lvKHi'
@@ -54,7 +56,11 @@ class DatabaseSeeder extends Seeder
         $ar->assignRole($a);
         $ap->assignRole($a);
         $aR->assignRole($a);
+        $aC->assignRole($a);
         // assign role to user
         $cockers->assignRole($a);
+
+        $this->call(ChargeSeeder::class);
+        $this->call(ChargeCategorySeeder::class);
     }
 }

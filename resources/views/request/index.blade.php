@@ -10,7 +10,7 @@
                             <div class="text-center mb-3">
                                 <img src="{{asset('images/logo.png')}}" alt="">
                             </div>
-                            <h4 class="text-center mb-4">Forgot Password</h4>
+                            <h4 class="text-center mb-4">Request Access to the OD MDT</h4>
                             <form method="GET" action="{{ route('request.send') }}">
                                 @csrf
                                 <div class="form-group">

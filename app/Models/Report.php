@@ -11,7 +11,24 @@ class Report extends Model
 
     protected $connection = 'mysql';
 
+    protected $fillable = [
+        'ped_id',
+        'title',
+        'description',
+        'charges',
+        'author_id',
+        'jail_time',
+        'charge_amount',
+    ];
+
+    protected $casts = [
+        'charges' => 'array'
+    ];
+
     public function character() {
-        return Character::where($this->ped_id, 'id');
+        return Character::findOrFail($this->ped_id);
+    }
+    public function author() {
+        return Character::findOrFail($this->author_id);
     }
 }

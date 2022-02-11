@@ -30,23 +30,28 @@
                                 <tr>
                                     <th></th>
                                     <th>Name</th>
-                                    <th>Department</th>
-                                    <th>Gender</th>
-                                    <th>Education</th>
-                                    <th>Mobile</th>
-                                    <th>Email</th>
-                                    <th>Joining Date</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Jail Time</th>
+                                    <th>Fine</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($reports as $r)
                                     <tr>
-                                        <td>{{$r->character()->name}}</td>
+                                        <td>{{$r->id}}</td>
+                                        <td>{{$r->character()->fullname()}}</td>
+                                        <td>{{$r->title}}</td>
+                                        <td>{{$r->author()->fullname()}}</td>
+                                        <td>{{$r->jail_time}}</td>
+                                        <td>{{$r->charge_amount}}</td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                <a href="{{route('reports.edit', $r->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                                                @if(Auth::user()->hasRole([1]))
+                                                    <a href="{{route('reports.destroy', $r->id)}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

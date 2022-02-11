@@ -8,8 +8,10 @@ class Requests extends Model
 {
     protected $fillable = [
         'email',
-        'name',
+        'firstname',
+        'lastname',
         'department',
         'role',
+        'token',
     ];
 }

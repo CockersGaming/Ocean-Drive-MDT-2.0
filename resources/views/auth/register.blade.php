@@ -1,5 +1,21 @@
 @extends('layouts.auth-app')
+
 @section('title', 'Register')
+
+@section('style')
+    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.min.css')}}">
+    <style>
+        #select2-nameSearch-container, .select2-search__field {
+            color: white !important;
+        }
+    </style>
+@stop
+
+@section('script')
+    <script src="{{asset('vendor/select2/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('js/plugins-init/select2-init.js')}}"></script>
+@stop
+
 @section('content')
     <div class="row justify-content-center h-100 align-items-center">
         <div class="col-md-6">
@@ -14,22 +30,12 @@
                             <form method="POST" action="{{ route('register.store') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="mb-1"><strong>First Name</strong></label>
-                                    <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ $request->firstname }}" required  placeholder="Pixel">
-                                    @error('firstname')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label class="mb-1"><strong>Last Name</strong></label>
-                                    <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ $request->lastname }}" required  placeholder="Bun">
-                                    @error('lastname')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <label class="mb-1"><strong>Find your Name:</strong></label>
+                                    <select id="nameSearch" name="nameSearch" class="single-select">
+                                        @foreach($chars as $c)
+                                            <option value="{{$c->id}}">{{$c->fullname()}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="mb-1"><strong>Username</strong></label>

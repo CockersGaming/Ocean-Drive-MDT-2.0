@@ -23,7 +23,7 @@ class SearchController extends Controller
             if ($chars) {
                 foreach ($chars as $key => $c) {
                     $output .= '<tr>' .
-                        '<td>' . $c->name . '</td>' .
+                        '<td>' . $c->fullname() . '</td>' .
                         '<td>' . $c->citizenid . '</td>' .
                         '<td>
                             <div class="d-flex">

@@ -11,6 +11,7 @@
         <link href="{{asset('./vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
         <link href="{{asset('./vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
         <link href="{{asset('./css/style.css')}}" rel="stylesheet">
+        @yield('style')
     </head>
     <body class="vh-100">
         <div class="authincation h-100">
@@ -28,5 +29,6 @@
         <script src="{{asset('./vendor/owl-carousel/owl.carousel.js')}}"></script>
         <script src="{{asset('./js/custom.min.js')}}"></script>
         <script src="{{asset('./js/deznav-init.js')}}"></script>
+        @yield('script')
     </body>
 </html>

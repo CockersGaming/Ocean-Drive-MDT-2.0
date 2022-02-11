@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\AccessRequestMail;
+use App\Models\Character;
 use App\Models\Requests;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\Console\Input\Input;
 
 class RegisteredUserController extends Controller
 {
@@ -31,8 +33,12 @@ class RegisteredUserController extends Controller
     public function create($token)
     {
         $request = Requests::all()->where('token', $token)->first();
+        $chars = Character::all();
         if ($request)
-            return view('auth.register', compact('request', $request));
+            return view('auth.register')->with([
+                'request' => $request,
+                'chars' => $chars
+            ]);
         else
             return redirect()->route('request.index')->with('error', 'An error has occurred!<br>Please remake a request!<br><br>If this error repeats contact management!');
     }
@@ -47,17 +53,16 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            'nameSearch' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
+            'char_id' => $request->nameSearch,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),

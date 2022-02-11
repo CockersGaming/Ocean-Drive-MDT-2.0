@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="card">
+                                        <div class="card" style="box-shadow: none !important;">
                                             <div class="card-body">
                                                 <div class="table-responsive">
                                                     <table class="table header-border table-hover verticle-middle" id="ped">

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Character;
+use App\Models\Charge;
+use App\Models\ChargeCategory;
+use App\Models\Report;
+use App\Models\Warrant;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -51,8 +55,18 @@ class CharacterController extends Controller
     public function show($id)
     {
         $char = Character::findOrFail($id);
+        $chargeCats = ChargeCategory::all();
+        $charges = Charge::pluck('name', 'id');
+        $reports = Report::pluck('id', 'id');
+        $charReps = Report::where('ped_id', $char->id)->get();
+        $charWars = Warrant::where('ped_id', $char->id)->get();
         return view('Character.show')->with([
-            'char' => $char
+            'char' => $char,
+            'chargeCats' => $chargeCats,
+            'charges' => $charges,
+            'reports' => $reports,
+            'charReps' => $charReps,
+            'charWars' => $charWars,
         ]);
     }
 
@@ -76,7 +90,12 @@ class CharacterController extends Controller
      */
     public function update(Request $request, Character $character)
     {
-        //
+        if($request->mugshot) {
+            $character->update([
+                'mugshot' => $request->mugshot
+            ]);
+        }
+        return redirect()->route('characters.show', $character->id)->with('success', 'Mug Shot added!');
     }
 
     /**
