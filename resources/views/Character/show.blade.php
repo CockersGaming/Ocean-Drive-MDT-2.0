@@ -155,7 +155,7 @@
                                         <a href="{{route('warrants.show', $cW->id)}}" class="btn btn-secondary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
                                         @if(Auth::user()->hasRole([1]))
                                             {!! Form::open(array('style' => 'display: inline-block;', 'method' => 'DELETE', 'onsubmit' => "return confirm('Are you sure?');", 'route' => ['warrants.destroy', $cW->id])) !!}
-                                            <button class="btn btn-danger shadow btn-xs sharp" type="submit"><i class="fa fa-trash"></i></button>
+                                                <button class="btn btn-danger shadow btn-xs sharp" type="submit"><i class="fa fa-trash"></i></button>
                                             {!! Form::close() !!}
                                         @endif
                                     </td>
@@ -271,7 +271,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" id="author" name="author" readonly hidden value="{{ Auth::user()->id }}">
+                                <input type="text" class="form-control" id="author" name="author" readonly hidden value="{{ Auth::user()->char_link()->id }}">
                             </div>
                         </div>
                     </div>

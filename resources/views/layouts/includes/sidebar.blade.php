@@ -28,7 +28,7 @@
                                 <span class="nav-text">Warrants</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="#">Home</a></li>
+                                <li><a href="{{route('warrants.index')}}">Home</a></li>
                             </ul>
                         </li>
                     </ul>

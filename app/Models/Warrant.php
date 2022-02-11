@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Date;
 
 class Warrant extends Model
 {
@@ -22,4 +23,18 @@ class Warrant extends Model
     protected $casts = [
         'report_id' => 'array'
     ];
+
+    public function character() {
+        return Character::findOrFail($this->ped_id);
+    }
+    public function author() {
+        return Character::findOrFail($this->author_id);
+    }
+    public function expire() {
+        if ($this->expire >= Date::now()){
+            return "Valid";
+        } else {
+            return "Expired";
+        }
+    }
 }

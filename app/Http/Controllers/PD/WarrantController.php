@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Report;
 use App\Models\Warrant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class WarrantController extends Controller
 {
@@ -16,7 +17,7 @@ class WarrantController extends Controller
      */
     public function index()
     {
-        $warrants = Warrant::all();
+        $warrants = Warrant::all()->where('expire', '>=', date('Y-m-d', strtotime('-7 days')));
 
         return view('pd.warrants.index')->with([
             'warrants' => $warrants
@@ -87,9 +88,15 @@ class WarrantController extends Controller
      * @param  \App\Models\Warrant  $warrent
      * @return \Illuminate\Http\Response
      */
-    public function edit(Warrant $warrent)
+    public function edit($id)
     {
-        //
+        $warrant = Warrant::findOrFail($id);
+        $reports = Report::pluck('id', 'id');
+
+        return view('pd.warrants.edit')->with([
+            'warrant'=>$warrant,
+            'reports'=>$reports
+        ]);
     }
 
     /**
@@ -99,9 +106,38 @@ class WarrantController extends Controller
      * @param  \App\Models\Warrant  $warrent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Warrant $warrent)
+    public function update(Request $request, $id)
     {
-        //
+        $reportArr = [];
+
+        $warrant = Warrant::findOrFail($id);
+
+        if ($request->reports) {
+            foreach ($request->reports as $key => $report) {
+                $rep = Report::findOrFail($report);
+                $reportArr[$key] = $rep->id;
+            }
+
+            $warrant->update([
+                'report_id' => $reportArr
+            ]);
+        }
+
+        if ($request->expireDate) {
+            $warrant->update([
+                'expire' => $request->expireDate
+            ]);
+        }
+
+        if ($request->notes) {
+            $warrant->update([
+                'notes' => $request->notes
+            ]);
+        }
+
+        $warrant->save();
+
+        return redirect()->route('warrants.index')->with('success', 'Successfully updated warrant ' . $warrant->id);
     }
 
     /**
@@ -110,8 +146,10 @@ class WarrantController extends Controller
      * @param  \App\Models\Warrant  $warrent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Warrant $warrent)
+    public function destroy($id)
     {
-        //
+        $warrant = Warrant::findOrFail($id);
+        $warrant->delete();
+        return redirect()->route('warrants.index')->with('success', 'Successfully Deleted');
     }
 }
