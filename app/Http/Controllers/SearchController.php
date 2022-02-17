@@ -19,7 +19,9 @@ class SearchController extends Controller
     public function ped(Request $request) {
         if($request->ajax()) {
             $output = "";
-            $chars = Character::where('name', 'LIKE', '%' . $request->search . "%")->orWhere('citizenid', 'LIKE', '%' . $request->search . "%")->get();
+            $chars = Character::all()->filter(function ($char) {
+                return $char->search(request('search'));
+            });
             if ($chars) {
                 foreach ($chars as $key => $c) {
                     $output .= '<tr>' .

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use function Sodium\add;
 
 class Character extends Model
@@ -17,8 +18,26 @@ class Character extends Model
 
     public $timestamps = false;
 
+    public function search($query)
+    {
+        $fName = Str::contains($this->firstname(), $query);
+        $lName = Str::contains($this->lastname(), $query);
+        $cid = Str::contains($this->citizenid, $query);
+
+        if ($fName || $lName || $cid) {
+            return $fName || $lName || $cid;
+        } else {
+            return null;
+        }
+    }
+
     public function getCharInfo() {
         return json_decode($this->charinfo);
+    }
+
+    public function citizenid(): string
+    {
+        return $this->getCharInfo()->citizenid;
     }
 
     public function fullname(): string

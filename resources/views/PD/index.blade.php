@@ -176,9 +176,9 @@
     <script src="{{asset('js/deznav-init.js')}}"></script>
 
     <script type="text/javascript">
-        $('#searchPed').on('keypress',function(event) {
-            var keycode = (event.keycode ? event.keycode : event.which);
-            if (keycode == '13') { // check if enter key is pressed to search ped
+        $('#searchPed').on('keyup',function(event) {
+            // var keycode = (event.keycode ? event.keycode : event.which);
+            // if (keycode == '13') { // check if enter key is pressed to search ped
                 $value = $(this).val();
                 $.ajax({
                     type: 'get',
@@ -186,9 +186,12 @@
                     data: {'search': $value},
                     success: function (data) {
                         $('#ped tbody').html(data);
+                    },
+                    error: function (err) {
+                        console.log(err['responseJSON']['message'])
                     }
                 });
-            }
+            // }
         })
 
         $('#searchCar').on('keypress',function(event) {
