@@ -10,21 +10,15 @@
         <link rel="stylesheet" href="{{asset('vendor/chartist/css/chartist.min.css')}}">
         <link href="{{asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
         <link href="{{asset('vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
-        <link href="{{asset('icons/simple-line-icons/css/simple-line-icons.css')}}" rel="stylesheet">
-        <link href="{{asset('icons/font-awesome-old/css/font-awesome.min.css')}}" rel="stylesheet">
-        <link href="{{asset('icons/material-design-iconic-font/css/materialdesignicons.min.css')}}" rel="stylesheet">
-        <link href="{{asset('icons/themify-icons/css/themify-icons.css')}}" rel="stylesheet">
-        <link href="{{asset('icons/line-awesome/css/line-awesome.min.css')}}" rel="stylesheet">
-        <link href="{{asset('icons/avasta/css/style.css')}}" rel="stylesheet">
-        <link href="{{asset('icons/flaticon/flaticon.css')}}" rel="stylesheet">
-        <link href="{{asset('icons/flaticon-1/flaticon.css')}}" rel="stylesheet">
-        <link href="{{asset('icons/icomoon/icomoon.css')}}" rel="stylesheet">
         <link href="{{asset('vendor/animate/animate.min.css')}}" rel="stylesheet">
         <link href="{{asset('vendor/aos/css/aos.min.css')}}" rel="stylesheet">
         <link href="{{asset('vendor/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet">
         <link href="{{asset('vendor/metismenu/css/metisMenu.min.css')}}" rel="stylesheet">
         <link href="{{asset('css/style.css')}}" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro.min.css" media="all" data-turbolinks-track="true">
+        <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro-v4-font-face.min.css" media="all" data-turbolinks-track="true">
+        <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro-v4-shims.min.css" media="all" data-turbolinks-track="true">
         @yield('styles')
     </head>
 
