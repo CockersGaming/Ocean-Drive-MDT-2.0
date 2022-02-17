@@ -6,11 +6,11 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>@yield('title')</title>
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('./images/Logo.png')}}">
-        <link rel="stylesheet" href="{{asset('./vendor/chartist/css/chartist.min.css')}}">
-        <link href="{{asset('./vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
-        <link href="{{asset('./vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
-        <link href="{{asset('./css/style.css')}}" rel="stylesheet">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('images/logo.png')}}">
+        <link rel="stylesheet" href="{{asset('vendor/chartist/css/chartist.min.css')}}">
+        <link href="{{asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
+        <link href="{{asset('vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
+        <link href="{{asset('css/style.css')}}" rel="stylesheet">
         @yield('style')
     </head>
     <body class="vh-100">
@@ -20,15 +20,13 @@
                 @yield('content')
             </div>
         </div>
-        <script src="{{asset('./vendor/global/global.min.js')}}"></script>
-        <script src="{{asset('./vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
-        <script src="{{asset('./vendor/chart.js/Chart.bundle.min.js')}}"></script>
-        <script src="{{asset('./vendor/peity/jquery.peity.min.js')}}"></script>
-        <script src="{{asset('./vendor/apexchart/apexchart.js')}}"></script>
-        <script src="{{asset('./js/dashboard/dashboard-1.js')}}"></script>
-        <script src="{{asset('./vendor/owl-carousel/owl.carousel.js')}}"></script>
-        <script src="{{asset('./js/custom.min.js')}}"></script>
-        <script src="{{asset('./js/deznav-init.js')}}"></script>
+        <script src="{{asset('vendor/global/global.min.js')}}"></script>
+        <script src="{{asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
+        <script src="{{asset('vendor/chart.js/Chart.bundle.min.js')}}"></script>
+        <script src="{{asset('vendor/peity/jquery.peity.min.js')}}"></script>
+        <script src="{{asset('vendor/owl-carousel/owl.carousel.js')}}"></script>
+        <script src="{{asset('js/custom.min.js')}}"></script>
+        <script src="{{asset('js/deznav-init.js')}}"></script>
         @yield('script')
     </body>
 </html>

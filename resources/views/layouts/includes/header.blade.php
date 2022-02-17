@@ -6,7 +6,7 @@
                 <ul class="navbar-nav header-right main-notification">
                     <li class="nav-item dropdown header-profile">
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                            <img src="{{asset('images/Logo.png')}}" width="20" alt="" />
+                            <img src="{{asset('images/logo.png')}}" width="20" alt="" />
                             <div class="header-info">
                                 <span>{{Auth::user()->fullname()}}</span>
                                 <small>{{Auth::user()->position()}}</small>
