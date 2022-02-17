@@ -21,7 +21,8 @@ class HomeController extends Controller
         } elseif (Auth::user()->hasRole([4])) {
             return redirect()->route('doj.index');
         } else {
-            return redirect()->route('login')->with('error', 'An error has occurred. Contact support for assistance!');
+            toastr()->error('An error has occurred. Contact support for assistance!');
+            return redirect()->route('login');
         }
     }
 }

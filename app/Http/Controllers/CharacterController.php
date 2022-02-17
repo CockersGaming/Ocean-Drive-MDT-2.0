@@ -95,7 +95,8 @@ class CharacterController extends Controller
                 'mugshot' => $request->mugshot
             ]);
         }
-        return redirect()->route('characters.show', $character->id)->with('success', 'Mug Shot added!');
+        toastr()->success('Mug Shot added!');
+        return redirect()->route('characters.show', $character->id);
     }
 
     /**

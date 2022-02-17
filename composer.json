@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-json": "*",
+        "ext-pdo": "*",
         "doctrine/dbal": "^3.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -15,8 +17,7 @@
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.2",
         "spatie/laravel-permission": "^5.4",
-        "ext-pdo": "*",
-        "ext-json": "*"
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

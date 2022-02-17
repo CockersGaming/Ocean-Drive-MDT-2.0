@@ -74,6 +74,8 @@ class UsersController extends Controller
             $user->assignRole($role);
         }
 
+        toastr()->success('User ' . $user->name . ' created!');
+
         return view('Admin.users.create');
     }
 
@@ -136,6 +138,7 @@ class UsersController extends Controller
 
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $user->syncRoles($roles);
+        toastr()->success('User '.$user->name.' updated!');
 
         return redirect()->route('users.index')->with('success', 'User '.$user->name.' updated!');
     }
@@ -151,6 +154,7 @@ class UsersController extends Controller
         abort_unless(Auth::user()->can('Administer Users'), '403');
         $user = User::findOrFail($id);
         $user->delete();
+        toastr()->success('User '.$user->name.' deleted!');
 
         return redirect()->route('users.index');
     }

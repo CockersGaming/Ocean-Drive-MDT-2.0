@@ -69,7 +69,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+        toastr()->success('Successfully Registered!<br>Please let a superior know so you can gain access to the MDT');
 
-        return redirect(RouteServiceProvider::REGISTER)->with('success', '');
+        return redirect(RouteServiceProvider::REGISTER);
     }
 }

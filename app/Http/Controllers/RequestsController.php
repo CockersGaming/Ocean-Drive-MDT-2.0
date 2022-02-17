@@ -54,6 +54,7 @@ class RequestsController extends Controller
         ];
 
         Mail::to($request->email)->send(new AccessRequestMail($details));
-        return redirect('login')->with(['request-success' => 'Email has been sent.']);
+        toastr()->error('Email has been sent');
+        return redirect('login');
     }
 }

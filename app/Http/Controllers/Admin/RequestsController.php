@@ -57,7 +57,8 @@ class RequestsController extends Controller
 
         Mail::to($request->email)->send(new AcceptAccessRequestMail($details));
 
-        return redirect()->route('requests.index')->with(['success' => 'Email has been sent.']);
+        toastr()->success('Email has been sent!');
+        return redirect()->route('requests.index');
     }
 
     /**
@@ -84,7 +85,8 @@ class RequestsController extends Controller
 
         Mail::to($request->email)->send(new RejectAccessRequestMail($details));
 
-        return redirect()->route('requests.index')->with(['success' => 'Email has been sent.']);
+        toastr()->success('Email has been sent!');
+        return redirect()->route('requests.index');
     }
 
     /**

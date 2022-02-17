@@ -57,7 +57,8 @@ class RolesController extends Controller
         $permissions = $request->input('permission') ? $request->input('permission') : [];
         $role->givePermissionTo($permissions);
 
-        return redirect()->route('roles.index')->with('success', "Successfully created " . $role->name);
+        toastr()->success('Successfully created ' . $role->name);
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -108,7 +109,7 @@ class RolesController extends Controller
         $role->update($request->except('permission'));
         $permissions = $request->input('permission') ? $request->input('permission') : [];
         $role->syncPermissions($permissions);
-
+        toastr()->success('Successfully updated ' . $role->name);
         return redirect()->route('roles.index')->with('success', "Successfully updated " . $role->name);
     }
 
@@ -123,6 +124,7 @@ class RolesController extends Controller
         abort_unless(Auth::user()->can('Administer Roles'), '403');
         $role = Roles::findOrFail($id);
         $role->delete();
+        toastr()->success('Successfully deleted ' . $role->name);
 
         return redirect()->route('roles.index')->with('status', "Successfully deleted " . $role->name);
     }

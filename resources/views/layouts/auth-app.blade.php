@@ -12,10 +12,10 @@
         <link href="{{asset('vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
         <link href="{{asset('css/style.css')}}" rel="stylesheet">
         @yield('style')
+        @toastr_css
     </head>
     <body class="vh-100">
         <div class="authincation h-100">
-            @include('layouts.flash_messages')
             <div class="container h-100">
                 @yield('content')
             </div>
@@ -28,5 +28,7 @@
         <script src="{{asset('js/custom.min.js')}}"></script>
         <script src="{{asset('js/deznav-init.js')}}"></script>
         @yield('script')
+        @toastr_js
+        @toastr_render
     </body>
 </html>

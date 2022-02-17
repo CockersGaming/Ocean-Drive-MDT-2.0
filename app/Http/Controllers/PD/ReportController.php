@@ -65,8 +65,9 @@ class ReportController extends Controller
             'jail_time' => $jailTime,
             'charge_amount' => $chargeAmount
         ]);
+        toastr()->success('Report ' . $report->id . ' added!');
 
-        return redirect()->route('characters.show', $request->pedid)->with('success', 'Report ' . $report->id . ' added!');
+        return redirect()->route('characters.show', $request->pedid);
     }
 
     /**
@@ -98,7 +99,9 @@ class ReportController extends Controller
                 'charges' => $charges,
             ]);
         } else {
-            return back()->with('error', "You don't have permission to do this!");
+            toastr()->error("You don't have permission to do this!");
+
+            return back();
         }
     }
 
@@ -126,8 +129,9 @@ class ReportController extends Controller
             'jail_time' => $jailTime,
             'charge_amount' => $chargeAmount
         ]);
+        toastr()->success('Update to '. $report->id .' Successful');
 
-        return redirect()->route('reports.index')->with('success', 'Update to '. $report->id .' Successful');
+        return redirect()->route('reports.index');
     }
 
     /**
