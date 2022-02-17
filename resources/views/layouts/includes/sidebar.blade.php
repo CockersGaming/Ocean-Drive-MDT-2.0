@@ -1,43 +1,43 @@
 <div class="deznav">
     <div class="deznav-scroll">
         <div class="main-profile">
-            <img src="{{asset('images/logo.png')}}" alt="">
-            <a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
-            <h5 class="mb-0 fs-20 text-black "><span class="font-w400">Hello,</span> {{Auth::user()->fullname()}}</h5>
+            <img src="{{ Auth::user()->char_link()->mugshot }}" alt="">
+            <h5 class="mb-0 fs-20 text-black "><span class="font-w400">Hello,<br></span> {{Auth::user()->fullname()}}</h5>
         </div>
         <ul class="metismenu" id="menu">
 
             @if(Auth::user()->hasRole([2]) || Auth::user()->hasRole([1]))
                 <li>
-                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                        <i class="flaticon-144-layout"></i>
-                        <span class="nav-text">PD</span>
+                    <a href="{{route('pd.index')}}">
+                        <i class="fas fa-home-alt"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void('');" aria-expanded="false">
+                        <i class="fas fa-file-contract"></i>
+                        <span class="nav-text">Reports</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{route('pd.index')}}">Home</a></li>
-                        <li>
-                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                <span class="nav-text">Reports</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('reports.index')}}">Home</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                <span class="nav-text">Warrants</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('warrants.index')}}">Home</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="{{route('reports.index')}}">Home</a></li>
+                        <li><a href="{{route('reports.create')}}">Create</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void('');" aria-expanded="false">
+                        <i class="fas fa-search"></i>
+                        <span class="nav-text">Warrants</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('warrants.index')}}">Home</a></li>
+                        <li><a href="{{route('warrants.create')}}">Create</a></li>
                     </ul>
                 </li>
             @endif
 
             @if(Auth::user()->hasRole([3]) || Auth::user()->hasRole([1]))
                 <li>
-                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <a class="has-arrow ai-icon" href="javascript:void('');" aria-expanded="false">
                         <i class="flaticon-144-layout"></i>
                         <span class="nav-text">EMS</span>
                     </a>
@@ -49,7 +49,7 @@
 
             @if(Auth::user()->hasRole([4]) || Auth::user()->hasRole([1]))
                 <li>
-                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <a class="has-arrow ai-icon" href="javascript:void('');" aria-expanded="false">
                         <i class="flaticon-144-layout"></i>
                         <span class="nav-text">DOJ</span>
                     </a>
@@ -61,7 +61,7 @@
 
             @if(Auth::user()->hasRole([1]))
                 <li>
-                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <a class="has-arrow ai-icon" href="javascript:void('');" aria-expanded="false">
                         <i class="flaticon-381-settings-2"></i>
                         <span class="nav-text">Admin</span>
                     </a>

@@ -63,7 +63,8 @@ class PermissionsController extends Controller
             $role->givePermissionTo($permission);
         }
 
-        return redirect()->route('permissions.index')->with('success', 'Permission '. $permission->name.' added!');
+        toastr()->success('Permission '. $permission->name.' added!');
+        return redirect()->route('permissions.index');
     }
 
     /**
@@ -110,7 +111,8 @@ class PermissionsController extends Controller
         $input = $request->all();
         $permission->fill($input)->save();
 
-        return redirect()->route('permissions.index')->with('success', 'Permission'. $permission->name.' updated!');
+        toastr()->success('Permission'. $permission->name.' updated!');
+        return redirect()->route('permissions.index');
     }
 
     /**
@@ -126,11 +128,13 @@ class PermissionsController extends Controller
 
         //Make it impossible to delete this specific permission
         if ($permission->name == "Administer roles & permissions") {
-            return redirect()->route('permissions.index')->with('error', 'Cannot delete this Permission!');
+            toastr()->error('Cannot delete this Permission!');
+            return redirect()->route('permissions.index');
         }
 
         $permission->delete();
 
-        return redirect()->route('permissions.index')->with('success', 'Permission deleted!');
+        toastr()->success('Permission deleted!');
+        return redirect()->route('permissions.index');
     }
 }

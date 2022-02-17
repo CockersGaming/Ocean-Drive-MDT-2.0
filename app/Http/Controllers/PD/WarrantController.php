@@ -67,8 +67,9 @@ class WarrantController extends Controller
                 'notes' => $request->notes
             ]);
         }
+        toastr()->success('Warrant ' . $warrant->id . ' added!');
 
-        return redirect()->route('characters.show', $request->pedid)->with('success', 'Warrant ' . $warrant->id . ' added!');
+        return redirect()->route('characters.show', $request->pedid);
     }
 
     /**
@@ -136,8 +137,9 @@ class WarrantController extends Controller
         }
 
         $warrant->save();
+        toastr()->success('Successfully updated warrant ' . $warrant->id);
 
-        return redirect()->route('warrants.index')->with('success', 'Successfully updated warrant ' . $warrant->id);
+        return redirect()->route('warrants.index');
     }
 
     /**
@@ -150,6 +152,7 @@ class WarrantController extends Controller
     {
         $warrant = Warrant::findOrFail($id);
         $warrant->delete();
-        return redirect()->route('warrants.index')->with('success', 'Successfully Deleted');
+        toastr()->success('Successfully Deleted');
+        return redirect()->route('warrants.index');
     }
 }

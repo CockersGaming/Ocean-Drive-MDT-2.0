@@ -69,8 +69,8 @@ class ChargeController extends Controller
                 'extra' => $request->extra
             ]);
         }
-
-        return redirect()->route('charges.index')->with('success', 'Charge '. $charge->name.' added!');
+        toastr()->success('Charge '. $charge->name.' added!');
+        return redirect()->route('charges.index');
     }
 
     /**
@@ -110,7 +110,8 @@ class ChargeController extends Controller
         $input = $request->all();
         $charge->fill($input)->save();
 
-        return redirect()->route('charges.index')->with('success', 'Charge '. $charge->name.' updated!');
+        toastr()->success('Charge '. $charge->name.' updated!');
+        return redirect()->route('charges.index');
     }
 
     /**
@@ -124,6 +125,7 @@ class ChargeController extends Controller
         abort_unless(Auth::user()->can('Administer Charges'), '403');
         $charge->delete();
 
-        return redirect()->route('charges.index')->with('success', 'Charge deleted!');
+        toastr()->success('Charge deleted!');
+        return redirect()->route('charges.index');
     }
 }
