@@ -6,15 +6,15 @@
         </div>
         <ul class="metismenu" id="menu">
 
-            @if(Auth::user()->hasRole([2]) || Auth::user()->hasRole([1]))
+            @if(Auth::user()->hasRole([2]))
                 <li>
-                    <a href="{{route('pd.index')}}">
-                        <i class="fas fa-home-alt"></i>
+                    <a href="{{route('pd.index')}}" class="text-center">
+                        <i class="fas fa-siren-on"></i>
                         <span class="nav-text">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a class="has-arrow" href="javascript:void('');" aria-expanded="false">
+                    <a class="has-arrow text-left" href="javascript:void('');" aria-expanded="false">
                         <i class="fas fa-file-contract"></i>
                         <span class="nav-text">Reports</span>
                     </a>
@@ -24,7 +24,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="has-arrow" href="javascript:void('');" aria-expanded="false">
+                    <a class="has-arrow text-left" href="javascript:void('');" aria-expanded="false">
                         <i class="fas fa-search"></i>
                         <span class="nav-text">Warrants</span>
                     </a>
@@ -35,34 +35,78 @@
                 </li>
             @endif
 
-            @if(Auth::user()->hasRole([3]) || Auth::user()->hasRole([1]))
+            @if(Auth::user()->hasRole([3]))
                 <li>
-                    <a class="has-arrow ai-icon" href="javascript:void('');" aria-expanded="false">
-                        <i class="flaticon-144-layout"></i>
+                    <a class="text-left" href="{{route('ems.index')}}" aria-expanded="false">
+                        <i class="fas fa-briefcase-medical"></i>
                         <span class="nav-text">EMS</span>
                     </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{route('ems.index')}}">Home</a></li>
-                    </ul>
                 </li>
             @endif
 
-            @if(Auth::user()->hasRole([4]) || Auth::user()->hasRole([1]))
+            @if(Auth::user()->hasRole([4]))
                 <li>
-                    <a class="has-arrow ai-icon" href="javascript:void('');" aria-expanded="false">
-                        <i class="flaticon-144-layout"></i>
+                    <a class="text-left" href="{{route('doj.index')}}">
+                        <i class="fas fa-gavel"></i>
                         <span class="nav-text">DOJ</span>
                     </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{route('doj.index')}}">Home</a></li>
-                    </ul>
                 </li>
             @endif
 
             @if(Auth::user()->hasRole([1]))
+                <li class="text-center border-bottom pb-2">
+                    PD Area
+                </li>
                 <li>
-                    <a class="has-arrow ai-icon" href="javascript:void('');" aria-expanded="false">
-                        <i class="flaticon-381-settings-2"></i>
+                    <a class="text-left" href="{{ route('pd.index') }}">
+                        <i class="fas fa-siren-on"></i>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-arrow text-left" href="javascript:void('');" aria-expanded="false">
+                        <i class="fas fa-file-contract"></i>
+                        <span class="nav-text">Reports</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('reports.index')}}">Home</a></li>
+                        <li><a href="{{route('reports.create')}}">Create</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow text-left" href="javascript:void('');" aria-expanded="false">
+                        <i class="fas fa-search"></i>
+                        <span class="nav-text">Warrants</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('warrants.index')}}">Home</a></li>
+                        <li><a href="{{route('warrants.create')}}">Create</a></li>
+                    </ul>
+                </li>
+                <li class="text-center border-top border-bottom pb-2">
+                    EMS Area
+                </li>
+                <li>
+                    <a class="text-left" href="{{ route('ems.index') }}">
+                        <i class="fas fa-briefcase-medical"></i>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </li>
+                <li class="text-center border-top border-bottom pb-2">
+                    DOJ Area
+                </li>
+                <li>
+                    <a class="text-left" href="{{ route('doj.index') }}">
+                        <i class="fas fa-gavel"></i>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </li>
+                <li class="text-center border-top border-bottom pb-2">
+                    Admin Area
+                </li>
+                <li>
+                    <a class="has-arrow text-left" href="javascript:void('');" aria-expanded="false">
+                        <i class="fas fa-user-shield"></i>
                         <span class="nav-text">Admin</span>
                     </a>
                     <ul aria-expanded="false">
