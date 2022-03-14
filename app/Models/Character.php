@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\CharacterFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -9,6 +11,8 @@ use function Sodium\add;
 
 class Character extends Model
 {
+    use HasFactory;
+
     protected $connection = 'ocean_drive';
     protected $table = 'players';
 
@@ -136,5 +140,15 @@ class Character extends Model
 
     public function metaDataWeaponLicence() {
         return $this->getMetaDataLicences()->weapon;
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return Factory
+     */
+    protected static function newFactory()
+    {
+        return CharacterFactory::new();
     }
 }

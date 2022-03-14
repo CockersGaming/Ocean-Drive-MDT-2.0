@@ -51,5 +51,8 @@
         @yield('scripts')
         @toastr_js
         @toastr_render
+        @env('local')
+            <script src="http://localhost:35729/livereload.js"></script>
+        @endenv
     </body>
 </html>
