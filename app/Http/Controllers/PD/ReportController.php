@@ -61,7 +61,7 @@ class ReportController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'charges' => $chargeArr,
-            'author_id' => $authorUser->character()->id,
+            'author_id' => $authorUser->char_link()->id,
             'jail_time' => $jailTime,
             'charge_amount' => $chargeAmount
         ]);
@@ -78,7 +78,19 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        return view('PD.reports.show');
+        $report = Report::findOrFail($id);
+
+        $charges = [];
+
+        foreach ($report->charges as $key => $c) {
+            $charge = Charge::findOrFail($c);
+            $charges[$key] = $charge;
+        }
+
+        return view('PD.reports.show')->with([
+            'report' => $report,
+            'charges' => $charges
+        ]);
     }
 
     /**
